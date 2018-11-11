@@ -59,11 +59,14 @@ int main(void)
   SystemClock_Config(); // Configure the system clock
 
   /* Initialize all configured peripherals */
-	
+	HW_Init();
+	PRINTF("\r\n\r\nStaring...\r\n");
+  
   /* Infinite loop */
   while (1)
   {
-
+    HAL_Delay(1000);
+    HAL_GPIO_TogglePin(LED1_GPIO_PORT,LED1_PIN);
   }
 }
 

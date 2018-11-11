@@ -15,21 +15,40 @@
 /* Includes ------------------------------------------------------------------*/
 #include "hw.h"
 
+
+static bool McuInitialized = false; //Flag to indicate if the MCU is Initialized
+
 /**
-  * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
-  *            System Clock source            = PLL (HSI)
-  *            SYSCLK(Hz)                     = 32000000
-  *            HCLK(Hz)                       = 32000000
-  *            AHB Prescaler                  = 1
-  *            APB1 Prescaler                 = 1
-  *            APB2 Prescaler                 = 1
-  *            HSI Frequency(Hz)              = 16000000
-  *            PLLMUL                         = 6
-  *            PLLDIV                         = 3
-  *            Flash Latency(WS)              = 1
+  * @brief This function initializes the hardware
+  * @param None
   * @retval None
   */
+void HW_Init( void )
+{
+  if( McuInitialized == false )
+  {
+    UART_Init();
+
+
+
+
+    GPIO_InitTypeDef GPIO_InitStruct;
+
+    LED1_GPIO_CLK_ENABLE();
+    /*Configure GPIO pin : LED_Pin */
+    GPIO_InitStruct.Pin = LED1_PIN;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(LED1_GPIO_PORT, &GPIO_InitStruct);
+
+    HAL_GPIO_WritePin(LED1_GPIO_PORT, LED1_PIN, GPIO_PIN_SET);
+      
+    McuInitialized = true;
+  }
+}
+
+
 void SystemClock_Config(void)
 {
 

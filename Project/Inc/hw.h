@@ -27,7 +27,13 @@
 #include "stm32l4xx_hal_conf.h"
 #include "hw_conf.h"
 #include "hw_msp.h"
+#include "hw_uart.h"
 
+
+#define BACKUP_PRIMASK()  uint32_t primask_bit= __get_PRIMASK()
+#define DISABLE_IRQ() __disable_irq()
+#define ENABLE_IRQ() __enable_irq()
+#define RESTORE_PRIMASK() __set_PRIMASK(primask_bit)
 
 /* ########################## Assert Selection ############################## */
 /**

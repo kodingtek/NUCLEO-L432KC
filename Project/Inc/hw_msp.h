@@ -30,6 +30,8 @@
 
 /* Exported functions ------------------------------------------------------- */ 
 
+void HW_Init( void );
+
 /**
   * @brief System Clock Configuration
   * @retval None
